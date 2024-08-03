@@ -1,4 +1,4 @@
-package com.fiap.hackathon_payment_management.domain.model;
+package com.fiap.hackathon_payment_management.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

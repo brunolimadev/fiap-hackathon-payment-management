@@ -1,6 +1,6 @@
 package com.fiap.hackathon_payment_management.usecase;
 
-import com.fiap.hackathon_payment_management.domain.model.Payment;
+import com.fiap.hackathon_payment_management.domain.entity.Payment;
 import com.fiap.hackathon_payment_management.domain.repository.ClientRepository;
 import com.fiap.hackathon_payment_management.domain.repository.PaymentRepository;
 import com.fiap.hackathon_payment_management.usecase.dto.PaymentDto;

@@ -1,6 +1,6 @@
 package com.fiap.hackathon_payment_management.usecase.dto;
 
-import com.fiap.hackathon_payment_management.domain.model.Client;
+import com.fiap.hackathon_payment_management.domain.entity.Client;
 import lombok.Getter;
 
 @Getter
