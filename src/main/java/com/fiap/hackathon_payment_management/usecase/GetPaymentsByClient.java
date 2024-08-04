@@ -14,8 +14,8 @@ public class GetPaymentsByClient {
         this.paymentRepository = paymentRepository;
     }
 
-    public List<PaymentDto> execute(String clientId) {
-        return paymentRepository.findByClientId(clientId).stream()
+    public List<PaymentDto> execute(String clientKey) {
+        return paymentRepository.findByClientKey(clientKey).stream()
                 .map(PaymentDto::new).collect(Collectors.toList());
     }
 

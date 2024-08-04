@@ -1,6 +1,5 @@
 package com.fiap.hackathon_payment_management.config;
 
-import com.fiap.hackathon_payment_management.domain.repository.ClientRepository;
 import com.fiap.hackathon_payment_management.domain.repository.PaymentRepository;
 import com.fiap.hackathon_payment_management.usecase.GetPaymentsByClient;
 import com.fiap.hackathon_payment_management.usecase.SavePayment;
@@ -16,7 +15,7 @@ public class SpringConfig {
     }
 
     @Bean
-    public SavePayment savePayment(PaymentRepository paymentRepository, ClientRepository clientRepository) {
-        return new SavePayment(paymentRepository, clientRepository);
+    public SavePayment savePayment(PaymentRepository paymentRepository) {
+        return new SavePayment(paymentRepository);
     }
 }

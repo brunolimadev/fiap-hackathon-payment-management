@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -16,9 +15,7 @@ public class Payment {
     @Id
     private String id;
 
-    @DBRef
-    private Client client;
-
+    private String clientKey;
     private String value;
     private String description;
     private String paymentMethod;

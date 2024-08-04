@@ -11,9 +11,9 @@ import java.util.List;
 public interface PaymentRepositoryImpl extends MongoRepository<Payment, String>, PaymentRepository {
 
     @Override
-    default List<Payment> findByClientId(String clientId) {
-        return findAllByClientId(clientId);
+    default List<Payment> findByClientKey(String clientKey) {
+        return findAllByClientKey(clientKey);
     }
 
-    List<Payment> findAllByClientId(String clientId);
+    List<Payment> findAllByClientKey(String clientKey);
 }
