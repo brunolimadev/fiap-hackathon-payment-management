@@ -1,5 +1,6 @@
 package com.fiap.hackathon_payment_management.usecase.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Getter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PaymentDto {
 
     @JsonProperty("chave_pagamento")

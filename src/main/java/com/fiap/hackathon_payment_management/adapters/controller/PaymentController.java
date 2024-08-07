@@ -28,8 +28,7 @@ public class PaymentController {
     public PaymentController(
             GetPaymentsByClient getPaymentsByClient,
             SavePayment savePayment,
-            List<PaymentValidation> validations
-    ) {
+            List<PaymentValidation> validations) {
 
         this.getPaymentsByClient = getPaymentsByClient;
         this.savePayment = savePayment;
@@ -38,10 +37,7 @@ public class PaymentController {
     }
 
     @Operation(summary = "Register payment")
-    @ApiResponse(
-            responseCode = "200",
-            description = "Returns a payment key"
-    )
+    @ApiResponse(responseCode = "200", description = "Returns a payment key")
     @PostMapping
     public ResponseEntity<PaymentDto> savePayment(@RequestBody @Valid PaymentRequestDto request) {
 
@@ -53,10 +49,9 @@ public class PaymentController {
 
     @Operation(summary = "List payments by CPF")
     @ApiResponse(responseCode = "200", description = "Returns a list payments")
-    @GetMapping("/clientes/{chave}")
+    @GetMapping("/cliente/{chave}")
     public ResponseEntity<List<PaymentDto>> getPaymentsByClient(
-            @PathVariable(name = "chave") String clientKey
-    ) {
+            @PathVariable(name = "chave") String clientKey) {
 
         return ResponseEntity.ok(getPaymentsByClient.execute(clientKey));
 

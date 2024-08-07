@@ -85,7 +85,7 @@ public class ValidateCreditCard implements PaymentValidation {
         }
 
         var totalPaymentAmount = new BigDecimal(currentPaymentValue);
-        var totalLimitCredit = new BigDecimal(creditCard.limit());
+        var totalLimitCredit = new BigDecimal(creditCard.limite());
 
         for (PaymentDto payment : listPayment) {
             var value = new BigDecimal(payment.getValue());
@@ -98,12 +98,12 @@ public class ValidateCreditCard implements PaymentValidation {
     private CreditCardResponseDto getCreditCardByNumber(String numberCreditCard) {
 
         List<CreditCardResponseDto> listMock = Arrays.asList(
-                new CreditCardResponseDto("", "69919462065", "1000", "5465 1946 1186 2985", "01/2020", "542"),
-                new CreditCardResponseDto("", "69919462063", "1000", "5465 1946 1186 2986", "01/2026", "542"),
-                new CreditCardResponseDto("", "69919462069", "1000", "5465 1946 1186 2989", "04/XX/2026", "542"));
+                new CreditCardResponseDto("", "69919462065", 1000.00, "5465 1946 1186 2985", "01/2020", "542"),
+                new CreditCardResponseDto("", "69919462063", 1000.00, "5465 1946 1186 2986", "01/2026", "542"),
+                new CreditCardResponseDto("", "69919462069", 1000.00, "5465 1946 1186 2989", "04/XX/2026", "542"));
 
         return listMock.stream().filter(dto -> dto.numero().equals(numberCreditCard)).findFirst()
-                .orElse(new CreditCardResponseDto("", "69919462063", "1000", "5465 1946 1186 2986", "01/2026", "542"));
+                .orElse(new CreditCardResponseDto("", "69919462063", 1000.00, "5465 1946 1186 2986", "01/2026", "542"));
 
         // ResponseEntity<CreditCardResponseDto> response = restTemplate.getForEntity(
         // String.format("%s/{numero}", urlGetCreditCard),

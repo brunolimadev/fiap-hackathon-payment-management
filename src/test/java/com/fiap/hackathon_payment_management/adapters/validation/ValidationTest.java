@@ -50,7 +50,7 @@ class ValidateCreditCardTest {
 
         PaymentRequestDto requestDto = new PaymentRequestDto(cpf, numero, dataValidade, cvv, valor);
 
-        CreditCardResponseDto creditCard = new CreditCardResponseDto("", cpf, "1000", numero, dataValidade, cvv);
+        CreditCardResponseDto creditCard = new CreditCardResponseDto("", cpf, 1000.00, numero, dataValidade, cvv);
 
         ResponseEntity<CreditCardResponseDto> responseEntity = new ResponseEntity<>(creditCard, HttpStatus.OK);
         when(restTemplate.getForEntity(anyString(), eq(CreditCardResponseDto.class))).thenReturn(responseEntity);
@@ -70,7 +70,7 @@ class ValidateCreditCardTest {
 
         PaymentRequestDto requestDto = new PaymentRequestDto(cpf, numero, cvv, dataValidade, valor);
 
-        CreditCardResponseDto creditCard = new CreditCardResponseDto("", numero, "1000", numero, dataValidade, cvv);
+        CreditCardResponseDto creditCard = new CreditCardResponseDto("", numero, 1000.00, numero, dataValidade, cvv);
 
         ResponseEntity<CreditCardResponseDto> responseEntity = new ResponseEntity<>(creditCard, HttpStatus.OK);
         when(restTemplate.getForEntity(anyString(), eq(CreditCardResponseDto.class))).thenReturn(responseEntity);
@@ -93,7 +93,7 @@ class ValidateCreditCardTest {
 
         PaymentRequestDto requestDto = new PaymentRequestDto(cpf, numero, cvv, dataValidade, valor);
 
-        CreditCardResponseDto creditCard = new CreditCardResponseDto("", "1234567890", "1000", numero, dataValidade,
+        CreditCardResponseDto creditCard = new CreditCardResponseDto("", "1234567890", 1000.00, numero, dataValidade,
                 cvv);
 
         ResponseEntity<CreditCardResponseDto> responseEntity = new ResponseEntity<>(creditCard, HttpStatus.OK);
@@ -117,7 +117,7 @@ class ValidateCreditCardTest {
 
         PaymentRequestDto requestDto = new PaymentRequestDto(cpf, numero, cvv, dataValidade, valor);
 
-        CreditCardResponseDto creditCard = new CreditCardResponseDto("", numero, "1000", numero, dataValidade, "123");
+        CreditCardResponseDto creditCard = new CreditCardResponseDto("", numero, 1000.00, numero, dataValidade, "123");
 
         ResponseEntity<CreditCardResponseDto> responseEntity = new ResponseEntity<>(creditCard, HttpStatus.OK);
         when(restTemplate.getForEntity(anyString(), eq(CreditCardResponseDto.class))).thenReturn(responseEntity);
@@ -140,7 +140,7 @@ class ValidateCreditCardTest {
 
         PaymentRequestDto requestDto = new PaymentRequestDto(cpf, numero, cvv, dataValidade, valor);
 
-        CreditCardResponseDto creditCard = new CreditCardResponseDto("", numero, "1000", numero, "01/2022", cvv);
+        CreditCardResponseDto creditCard = new CreditCardResponseDto("", numero, 1000.00, numero, "01/2022", cvv);
 
         ResponseEntity<CreditCardResponseDto> responseEntity = new ResponseEntity<>(creditCard, HttpStatus.OK);
         when(restTemplate.getForEntity(anyString(), eq(CreditCardResponseDto.class))).thenReturn(responseEntity);
@@ -163,7 +163,7 @@ class ValidateCreditCardTest {
 
         PaymentRequestDto requestDto = new PaymentRequestDto(cpf, numero, cvv, dataValidade, valor);
 
-        CreditCardResponseDto creditCard = new CreditCardResponseDto("", numero, "1000", numero, "01/2010", cvv);
+        CreditCardResponseDto creditCard = new CreditCardResponseDto("", numero, 1000.00, numero, "01/2010", cvv);
 
         ResponseEntity<CreditCardResponseDto> responseEntity = new ResponseEntity<>(creditCard, HttpStatus.OK);
         when(restTemplate.getForEntity(anyString(), eq(CreditCardResponseDto.class))).thenReturn(responseEntity);
@@ -189,11 +189,12 @@ class ValidateCreditCardTest {
         Payment payment1 = new Payment(dataValidade, numero, valor, cvv, dataValidade, valor);
         Payment payment2 = new Payment(dataValidade, "5465 9034 1186 2986", valor, cvv, dataValidade, "200");
 
-        List<PaymentDto> payments = Arrays.asList(ConvertEntityToDto.convert(payment1), ConvertEntityToDto.convert(payment2));
+        List<PaymentDto> payments = Arrays.asList(ConvertEntityToDto.convert(payment1),
+                ConvertEntityToDto.convert(payment2));
 
         when(getPaymentsByClient.execute(cpf)).thenReturn(payments);
 
-        CreditCardResponseDto creditCard = new CreditCardResponseDto("", numero, "200", numero, dataValidade, cvv);
+        CreditCardResponseDto creditCard = new CreditCardResponseDto("", numero, 200.00, numero, dataValidade, cvv);
 
         ResponseEntity<CreditCardResponseDto> responseEntity = new ResponseEntity<>(creditCard, HttpStatus.OK);
         when(restTemplate.getForEntity(anyString(), eq(CreditCardResponseDto.class))).thenReturn(responseEntity);
@@ -221,7 +222,7 @@ class ValidateCreditCardTest {
                 ConvertEntityToDto.convertAllValues(payment2));
         when(getPaymentsByClient.execute(cpf)).thenReturn(payments);
 
-        CreditCardResponseDto creditCard = new CreditCardResponseDto("", "69919462063", "300", numero, dataValidade,
+        CreditCardResponseDto creditCard = new CreditCardResponseDto("", "69919462063", 300.00, numero, dataValidade,
                 cvv);
 
         ResponseEntity<CreditCardResponseDto> responseEntity = new ResponseEntity<>(creditCard, HttpStatus.OK);
