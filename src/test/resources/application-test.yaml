@@ -1,0 +1,12 @@
+server:
+    port: 8084
+    servlet:
+        context-path: /api/
+spring:
+    application:
+        name: payment-management
+    data:
+        mongodb:
+            uri: ${MONGO_URL:mongodb://localhost:27017/fiap-hackathon-payment-db}
+ms-credit-card:
+    url: http://localhost:8083/api/cartao
