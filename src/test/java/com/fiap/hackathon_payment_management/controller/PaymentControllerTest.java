@@ -7,6 +7,7 @@ import com.fiap.hackathon_payment_management.usecase.GetPaymentsByClient;
 import com.fiap.hackathon_payment_management.usecase.SavePayment;
 import com.fiap.hackathon_payment_management.usecase.dto.PaymentDto;
 import com.fiap.hackathon_payment_management.usecase.dto.PaymentRequestDto;
+import com.fiap.hackathon_payment_management.utils.ConvertEntityToDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -41,14 +42,15 @@ public class PaymentControllerTest {
     }
 
     @Test
-    public void testGetPagamentosPorCliente_Success() {
+    void testGetPagamentosPorCliente_Success() {
         // Given
         String clientId = "cliente1";
         List<PaymentDto> pagamentos = Arrays.asList(
-                new PaymentDto(new Payment("01", "02", "100", "Descricao Teste", "metodo",
+                ConvertEntityToDto.convert(new Payment("01", "02", "100", "Descricao Teste", "metodo",
                         "status")),
-                new PaymentDto(new Payment("01", "02", "100", "Descricao Teste", "metodo",
-                        "status")));
+                ConvertEntityToDto.convert(new Payment("01", "02", "100", "Descricao Teste", "metodo",
+                        "status"))
+        );
 
         // When
         when(getPaymentsByClient.execute(clientId)).thenReturn(pagamentos);
@@ -60,7 +62,7 @@ public class PaymentControllerTest {
     }
 
     @Test
-    public void testGetPagamentosPorCliente_EmptyList() {
+    void testGetPagamentosPorCliente_EmptyList() {
         // Given
         String clienteId = "cliente1";
         List<PaymentDto> pagamentos = Arrays.asList();
@@ -76,7 +78,7 @@ public class PaymentControllerTest {
     }
 
     @Test
-    public void testGetPagamentosPorCliente_NotFound() {
+    void testGetPagamentosPorCliente_NotFound() {
         // Given
         String clienteId = "cliente1";
 
@@ -90,10 +92,10 @@ public class PaymentControllerTest {
     }
 
     @Test
-    public void testSavePayment_Success() {
+    void testSavePayment_Success() {
         // Given
         var request = new PaymentRequestDto("100", "decricao", "metodo", "status", "Nome do cliente");
-        var resposne = new PaymentDto(Payment.builder()
+        var resposne = ConvertEntityToDto.convert(Payment.builder()
                 .value("100")
                 .paymentMethod("metodo")
                 .description("descricao")

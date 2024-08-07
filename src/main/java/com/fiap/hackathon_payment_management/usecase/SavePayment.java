@@ -1,9 +1,10 @@
 package com.fiap.hackathon_payment_management.usecase;
 
-import com.fiap.hackathon_payment_management.domain.entity.Payment;
 import com.fiap.hackathon_payment_management.domain.repository.PaymentRepository;
 import com.fiap.hackathon_payment_management.usecase.dto.PaymentDto;
 import com.fiap.hackathon_payment_management.usecase.dto.PaymentRequestDto;
+import com.fiap.hackathon_payment_management.utils.ConvertDtoToEntity;
+import com.fiap.hackathon_payment_management.utils.ConvertEntityToDto;
 
 public class SavePayment {
 
@@ -14,17 +15,11 @@ public class SavePayment {
     }
 
     public PaymentDto execute(PaymentRequestDto paymentDto) {
-        var payment = convertPaymentDtoToPaymentEntity(paymentDto);
-        return new PaymentDto(paymentRepository.save(payment));
+
+        var payment = ConvertDtoToEntity.convert(paymentDto);
+
+        return ConvertEntityToDto.convert(paymentRepository.save(payment));
+
     }
 
-    private Payment convertPaymentDtoToPaymentEntity(PaymentRequestDto paymentDto) {
-        return Payment.builder()
-                .clientKey(paymentDto.cpf())
-                .value(paymentDto.valor())
-                .description("Descrição do Pagamento")
-                .paymentMethod("cartao_credito")
-                .status("aprovado")
-                .build();
-    }
 }

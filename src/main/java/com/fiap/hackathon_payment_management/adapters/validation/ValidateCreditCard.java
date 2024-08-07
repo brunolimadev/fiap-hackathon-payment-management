@@ -29,11 +29,14 @@ public class ValidateCreditCard implements PaymentValidation {
 
     private final GetPaymentsByClient getPaymentsByClient;
 
+    @Autowired
     public ValidateCreditCard(
             RestTemplate restTemplate,
             GetPaymentsByClient getPaymentsByClient) {
+
         this.restTemplate = restTemplate;
         this.getPaymentsByClient = getPaymentsByClient;
+
     }
 
     @Override
@@ -85,7 +88,7 @@ public class ValidateCreditCard implements PaymentValidation {
         var totalLimitCredit = new BigDecimal(creditCard.limit());
 
         for (PaymentDto payment : listPayment) {
-            var value = new BigDecimal(payment.getValor());
+            var value = new BigDecimal(payment.getValue());
             totalPaymentAmount = totalPaymentAmount.add(value);
         }
 

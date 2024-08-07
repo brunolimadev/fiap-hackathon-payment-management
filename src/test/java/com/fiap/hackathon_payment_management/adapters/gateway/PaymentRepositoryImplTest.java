@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @AutoConfigureDataMongo
 @Transactional
 @ActiveProfiles("test")
-public class PaymentRepositoryImplTest {
+class PaymentRepositoryImplTest {
 
     @Autowired
     private PaymentRepositoryImpl paymentRepository;
@@ -36,6 +36,7 @@ public class PaymentRepositoryImplTest {
         assertNotNull(pagamentosCliente2);
         assertEquals(1, pagamentosCliente2.size());
         assertEquals("02", pagamentosCliente2.get(0).getClientKey());
+
     }
 
 }
