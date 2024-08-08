@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.fiap</groupId>
 	<artifactId>hackathon-payment-management</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.3</version>
 	<name>hackathon-payment-management</name>
 	<description>Hackathon Postech Fiap Microservice Payment Management Credit Card </description>
 	<url/>
