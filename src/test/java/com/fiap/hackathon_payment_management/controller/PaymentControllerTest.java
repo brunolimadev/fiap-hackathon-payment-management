@@ -22,7 +22,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-public class PaymentControllerTest {
+class PaymentControllerTest {
 
     @Mock
     private GetPaymentsByClient getPaymentsByClient;
@@ -37,7 +37,7 @@ public class PaymentControllerTest {
     private PaymentController paymentController;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
@@ -46,9 +46,9 @@ public class PaymentControllerTest {
         // Given
         String clientId = "cliente1";
         List<PaymentDto> pagamentos = Arrays.asList(
-                ConvertEntityToDto.convert(new Payment("01", "02", "100", "Descricao Teste", "metodo",
+                ConvertEntityToDto.convert(new Payment("01", "02", 100.00, "Descricao Teste", "metodo",
                         "status")),
-                ConvertEntityToDto.convert(new Payment("01", "02", "100", "Descricao Teste", "metodo",
+                ConvertEntityToDto.convert(new Payment("01", "02", 100.00, "Descricao Teste", "metodo",
                         "status"))
         );
 
@@ -94,21 +94,21 @@ public class PaymentControllerTest {
     @Test
     void testSavePayment_Success() {
         // Given
-        var request = new PaymentRequestDto("100", "decricao", "metodo", "status", "Nome do cliente");
-        var resposne = ConvertEntityToDto.convert(Payment.builder()
-                .value("100")
+        var request = new PaymentRequestDto("100", "decricao", "metodo", "status", 100.00);
+        var paymentDto = ConvertEntityToDto.convert(Payment.builder()
+                .value(100.00)
                 .paymentMethod("metodo")
                 .description("descricao")
                 .status("status")
                 .clientKey("02")
                 .build());
         // When
-        when(savePayment.execute(request)).thenReturn(resposne);
+        when(savePayment.execute(request)).thenReturn(paymentDto);
         ResponseEntity<?> response = paymentController.savePayment(request);
 
         // Then
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(resposne, response.getBody());
+        assertEquals(paymentDto, response.getBody());
     }
 
 }

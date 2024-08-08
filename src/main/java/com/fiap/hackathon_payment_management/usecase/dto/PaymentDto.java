@@ -17,7 +17,7 @@ public class PaymentDto {
     @JsonProperty("chave_pagamento")
     private String paymentKey;
     @JsonProperty("valor")
-    private String value;
+    private Double value;
     @JsonProperty("descricao")
     private String description;
     @JsonProperty("metodo_pagamento")
