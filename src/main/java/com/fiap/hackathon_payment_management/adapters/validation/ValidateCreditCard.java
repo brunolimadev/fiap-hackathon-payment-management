@@ -13,11 +13,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
-import java.util.List;
 
 @Component
 public class ValidateCreditCard implements PaymentValidation {
@@ -42,9 +37,7 @@ public class ValidateCreditCard implements PaymentValidation {
     @Override
     public void validate(PaymentRequestDto requestDto) {
 
-        // var creditCard = getCreditCardByNumber(requestDto.numero());
-
-        String url = new StringBuilder().append(urlGetCreditCard).append("/").append(requestDto.numero()).toString();
+        String url = urlGetCreditCard + "/" + requestDto.numero();
 
         ResponseEntity<CreditCardResponseDto> result = restTemplate.getForEntity(url,
                 CreditCardResponseDto.class);
@@ -67,10 +60,6 @@ public class ValidateCreditCard implements PaymentValidation {
             throw new ValidationException("Data de validade não corresponde.");
         }
 
-        if (isDateBeforeCurrentDate(creditCard.data_validade())) {
-            throw new ValidationException("Data de validade fora do prazo.");
-        }
-
         if (reachedCardLimit(creditCard, requestDto.valor())) {
             throw new ValidationLimitCardException("Atingiu o limite do cartão de crédito.");
         }
@@ -78,6 +67,7 @@ public class ValidateCreditCard implements PaymentValidation {
     }
 
     private boolean reachedCardLimit(CreditCardResponseDto creditCard, String currentPaymentValue) {
+
         var listPayment = getPaymentsByClient.execute(creditCard.cpf());
 
         if (listPayment.isEmpty()) {
@@ -93,45 +83,7 @@ public class ValidateCreditCard implements PaymentValidation {
         }
 
         return totalPaymentAmount.compareTo(totalLimitCredit) > 0;
-    }
 
-    private CreditCardResponseDto getCreditCardByNumber(String numberCreditCard) {
-
-        List<CreditCardResponseDto> listMock = Arrays.asList(
-                new CreditCardResponseDto("", "69919462065", 1000.00, "5465 1946 1186 2985", "01/2020", "542"),
-                new CreditCardResponseDto("", "69919462063", 1000.00, "5465 1946 1186 2986", "01/2026", "542"),
-                new CreditCardResponseDto("", "69919462069", 1000.00, "5465 1946 1186 2989", "04/XX/2026", "542"));
-
-        return listMock.stream().filter(dto -> dto.numero().equals(numberCreditCard)).findFirst()
-                .orElse(new CreditCardResponseDto("", "69919462063", 1000.00, "5465 1946 1186 2986", "01/2026", "542"));
-
-        // ResponseEntity<CreditCardResponseDto> response = restTemplate.getForEntity(
-        // String.format("%s/{numero}", urlGetCreditCard),
-        // CreditCardResponseDto.class,
-        // numberCreditCard
-        // );
-        //
-        // if (response.getStatusCode() == HttpStatus.NOT_FOUND) {
-        // throw new ValidationException("Erro ao realizar busca do cartão de credito");
-        // }
-        //
-        // if (response.getBody() == null) {
-        // throw new ValidationException("Cartão de créditdo não encontrado!");
-        // }
-        //
-        // return response.getBody();
-    }
-
-    private static boolean isDateBeforeCurrentDate(String cardValidateDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
-
-        try {
-            LocalDate cardDate = LocalDate.parse(("01/").concat(cardValidateDate), formatter);
-            LocalDate currentDate = LocalDate.now();
-            return cardDate.isBefore(currentDate);
-        } catch (DateTimeParseException e) {
-            throw new ValidationException("Data no formato inválido. Use MM/yyyy.");
-        }
     }
 
 }

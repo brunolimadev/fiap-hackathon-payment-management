@@ -22,7 +22,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-public class PaymentControllerTest {
+class PaymentControllerTest {
 
     @Mock
     private GetPaymentsByClient getPaymentsByClient;
@@ -37,7 +37,7 @@ public class PaymentControllerTest {
     private PaymentController paymentController;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
@@ -95,7 +95,7 @@ public class PaymentControllerTest {
     void testSavePayment_Success() {
         // Given
         var request = new PaymentRequestDto("100", "decricao", "metodo", "status", "Nome do cliente");
-        var resposne = ConvertEntityToDto.convert(Payment.builder()
+        var paymentDto = ConvertEntityToDto.convert(Payment.builder()
                 .value("100")
                 .paymentMethod("metodo")
                 .description("descricao")
@@ -103,12 +103,12 @@ public class PaymentControllerTest {
                 .clientKey("02")
                 .build());
         // When
-        when(savePayment.execute(request)).thenReturn(resposne);
+        when(savePayment.execute(request)).thenReturn(paymentDto);
         ResponseEntity<?> response = paymentController.savePayment(request);
 
         // Then
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(resposne, response.getBody());
+        assertEquals(paymentDto, response.getBody());
     }
 
 }
