@@ -16,7 +16,7 @@ public class Payment {
     private String id;
 
     private String clientKey;
-    private String value;
+    private Double value;
     private String description;
     private String paymentMethod;
     private String status;
