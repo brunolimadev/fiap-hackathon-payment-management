@@ -12,6 +12,6 @@ public record PaymentRequestDto(
         @NotNull
         String cvv,
         @NotNull
-        String valor
+        Double valor
 ) {
 }
