@@ -1,5 +1,6 @@
 package com.fiap.hackathon_payment_management.usecase;
 
+import com.fiap.hackathon_payment_management.adapters.validation.exception.ValidationException;
 import com.fiap.hackathon_payment_management.domain.repository.PaymentRepository;
 import com.fiap.hackathon_payment_management.usecase.dto.PaymentDto;
 import com.fiap.hackathon_payment_management.utils.ConvertEntityToDto;
@@ -18,6 +19,14 @@ public class GetPaymentsByClient {
     }
 
     public List<PaymentDto> execute(String clientKey) {
+
+        var payments = paymentRepository.findByClientKey(clientKey);
+
+        if (payments.isEmpty()) {
+
+            throw new ValidationException("Nao existe pagamentos para o cliente");
+
+        }
 
         return paymentRepository.findByClientKey(clientKey).stream()
                 .map(ConvertEntityToDto::convertAllValues)

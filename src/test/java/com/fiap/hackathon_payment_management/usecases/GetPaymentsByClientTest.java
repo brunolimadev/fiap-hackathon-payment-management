@@ -1,5 +1,6 @@
 package com.fiap.hackathon_payment_management.usecases;
 
+import com.fiap.hackathon_payment_management.adapters.validation.exception.ValidationException;
 import com.fiap.hackathon_payment_management.domain.entity.Payment;
 import com.fiap.hackathon_payment_management.domain.repository.PaymentRepository;
 import com.fiap.hackathon_payment_management.usecase.GetPaymentsByClient;
@@ -10,9 +11,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
@@ -62,6 +65,21 @@ class GetPaymentsByClientTest {
     assertThat(response)
             .isNotEmpty()
             .hasSize(1);
+
+  }
+
+  @Test
+  void shouldGetPaymentsByClientWithError() {
+
+    //Arrange
+    var paymentEntityList = new ArrayList<Payment>();
+
+    when(paymentRepository.findByClientKey(anyString())).thenReturn(paymentEntityList);
+
+    //Act & Assert
+    assertThatThrownBy(() -> getPaymentsByClient.execute("22222222222"))
+            .isInstanceOf(ValidationException.class)
+            .hasMessage("Nao existe pagamentos para o cliente");
 
   }
 
