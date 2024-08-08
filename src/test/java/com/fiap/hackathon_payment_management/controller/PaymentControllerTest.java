@@ -46,9 +46,9 @@ class PaymentControllerTest {
         // Given
         String clientId = "cliente1";
         List<PaymentDto> pagamentos = Arrays.asList(
-                ConvertEntityToDto.convert(new Payment("01", "02", "100", "Descricao Teste", "metodo",
+                ConvertEntityToDto.convert(new Payment("01", "02", 100.00, "Descricao Teste", "metodo",
                         "status")),
-                ConvertEntityToDto.convert(new Payment("01", "02", "100", "Descricao Teste", "metodo",
+                ConvertEntityToDto.convert(new Payment("01", "02", 100.00, "Descricao Teste", "metodo",
                         "status"))
         );
 
@@ -94,9 +94,9 @@ class PaymentControllerTest {
     @Test
     void testSavePayment_Success() {
         // Given
-        var request = new PaymentRequestDto("100", "decricao", "metodo", "status", "Nome do cliente");
+        var request = new PaymentRequestDto("100", "decricao", "metodo", "status", 100.00);
         var paymentDto = ConvertEntityToDto.convert(Payment.builder()
-                .value("100")
+                .value(100.00)
                 .paymentMethod("metodo")
                 .description("descricao")
                 .status("status")

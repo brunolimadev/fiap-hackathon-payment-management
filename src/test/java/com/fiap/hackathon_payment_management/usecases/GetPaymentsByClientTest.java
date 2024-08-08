@@ -43,14 +43,14 @@ class GetPaymentsByClientTest {
   void shouldGetPaymentsByClientWithSuccess() {
 
     //Arrange
-    var paymentRequestDto = new PaymentRequestDto("100", "decricao", "metodo", "status", "Nome do cliente");
+    var paymentRequestDto = new PaymentRequestDto("100", "decricao", "metodo", "status", 100.00);
     var paymentEntityList = List.of(Payment.builder()
             .id("1")
             .clientKey("11111111111")
             .status("status")
             .paymentMethod("metodo")
             .description("descricao")
-            .value("100")
+            .value(100.00)
             .build());
 
     when(paymentRepository.findByClientKey(anyString())).thenReturn(paymentEntityList);

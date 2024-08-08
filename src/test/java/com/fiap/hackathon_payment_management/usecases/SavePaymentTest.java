@@ -42,13 +42,13 @@ class SavePaymentTest {
   void shouldRegisterPaymentWithSuccess() {
 
     //Arrange
-    var paymentRequestDto = new PaymentRequestDto("100", "decricao", "metodo", "status", "Nome do cliente");
+    var paymentRequestDto = new PaymentRequestDto("100", "decricao", "metodo", "status", 100.00);
     var paymentEntity = Payment.builder()
                     .id("1")
                     .status("status")
                     .paymentMethod("metodo")
                     .description("descricao")
-                    .value("100")
+                    .value(100.00)
             .build();
 
     when(paymentRepository.save(any(Payment.class))).thenReturn(paymentEntity);

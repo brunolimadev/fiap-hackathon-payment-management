@@ -50,7 +50,7 @@ class ValidateCreditCardTest {
     String numero = "5465 1946 1186 2986";
     String cvv = "542";
     String dataValidade = "01/26";
-    String valor = "1.2";
+    Double valor = 1.2;
 
     PaymentRequestDto requestDto = new PaymentRequestDto(cpf, numero, dataValidade, cvv, valor);
 
@@ -72,7 +72,7 @@ class ValidateCreditCardTest {
     String numero = "5465 1946 1186 2986";
     String cvv = "542";
     String dataValidade = "01/2026";
-    String valor = "1.2";
+    Double valor = 1.2;
 
     PaymentRequestDto requestDto = new PaymentRequestDto(cpf, numero, cvv, dataValidade, valor);
 
@@ -97,7 +97,7 @@ class ValidateCreditCardTest {
     String numero = "5465 1946 1186 2986";
     String cvv = "542";
     String dataValidade = "01/2026";
-    String valor = "1.2";
+    Double valor = 1.2;
 
     PaymentRequestDto requestDto = new PaymentRequestDto(cpf, numero, cvv, dataValidade, valor);
 
@@ -123,7 +123,7 @@ class ValidateCreditCardTest {
     String numero = "5465 1946 1186 2986";
     String cvv = "542";
     String dataValidade = "01/2026";
-    String valor = "1.2";
+    Double valor = 1.2;
 
     PaymentRequestDto requestDto = new PaymentRequestDto(cpf, numero, cvv, dataValidade, valor);
 
@@ -148,7 +148,7 @@ class ValidateCreditCardTest {
     String numero = "5465 1946 1186 2986";
     String cvv = "542";
     String dataValidade = "01/2026";
-    String valor = "1.2";
+    Double valor = 1.2;
 
     PaymentRequestDto requestDto = new PaymentRequestDto(cpf, numero, cvv, dataValidade, valor);
 
@@ -172,7 +172,7 @@ class ValidateCreditCardTest {
     String numero = "5465 1946 1186 2986";
     String cvv = "542";
     String dataValidade = "01/26";
-    String valor = "1.2";
+    Double valor = 1.2;
 
     PaymentRequestDto requestDto = new PaymentRequestDto(cpf, numero, dataValidade, cvv, valor);
 
@@ -196,12 +196,12 @@ class ValidateCreditCardTest {
     String numero = "5465 1946 1186 2986";
     String cvv = "542";
     String dataValidade = "01/26";
-    String valor = "400.2";
+    Double valor = 400.2;
 
     PaymentRequestDto requestDto = new PaymentRequestDto(cpf, numero, dataValidade, cvv, valor);
 
-    Payment payment1 = new Payment(dataValidade, "69919462063", valor, cvv, dataValidade, valor);
-    Payment payment2 = new Payment(dataValidade, "69919462063", valor, cvv, dataValidade, "200");
+    Payment payment1 = new Payment(dataValidade, "69919462063", valor, cvv, dataValidade, "aprovado");
+    Payment payment2 = new Payment(dataValidade, "69919462063", valor, cvv, dataValidade, "aprovado");
 
     List<PaymentDto> payments = Arrays.asList(
             ConvertEntityToDto.convertAllValues(payment1),
@@ -227,12 +227,12 @@ class ValidateCreditCardTest {
     String numero = "5465 1946 1186 2986";
     String cvv = "542";
     String dataValidade = "01/26";
-    String valor = "1.2";
+    Double valor = 1.2;
 
     PaymentRequestDto requestDto = new PaymentRequestDto(cpf, numero, dataValidade, cvv, valor);
 
-    Payment payment1 = new Payment(dataValidade, "69919462063", valor, cvv, dataValidade, valor);
-    Payment payment2 = new Payment(dataValidade, "69919462063", valor, cvv, dataValidade, "200");
+    Payment payment1 = new Payment(dataValidade, "69919462063", valor, cvv, dataValidade, "aprovado");
+    Payment payment2 = new Payment(dataValidade, "69919462063", valor, cvv, dataValidade, "aprovado");
 
     List<PaymentDto> payments = Arrays.asList(
             ConvertEntityToDto.convertAllValues(payment1),
@@ -258,7 +258,7 @@ class ValidateCreditCardTest {
     String numero = "5465 1946 1186 2986";
     String cvv = "542";
     String dataValidade = "01/2026";
-    String valor = "1.2";
+    Double valor = 1.2;
 
     PaymentRequestDto requestDto = new PaymentRequestDto(cpf, numero, cvv, dataValidade, valor);
 

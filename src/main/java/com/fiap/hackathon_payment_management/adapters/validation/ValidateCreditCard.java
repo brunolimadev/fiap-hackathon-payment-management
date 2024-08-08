@@ -66,7 +66,7 @@ public class ValidateCreditCard implements PaymentValidation {
 
     }
 
-    private boolean reachedCardLimit(CreditCardResponseDto creditCard, String currentPaymentValue) {
+    private boolean reachedCardLimit(CreditCardResponseDto creditCard, Double currentPaymentValue) {
 
         var listPayment = getPaymentsByClient.execute(creditCard.cpf());
 
