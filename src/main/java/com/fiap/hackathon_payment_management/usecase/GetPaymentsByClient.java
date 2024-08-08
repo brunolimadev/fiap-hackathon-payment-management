@@ -13,20 +13,10 @@ public class GetPaymentsByClient {
     private final PaymentRepository paymentRepository;
 
     public GetPaymentsByClient(PaymentRepository paymentRepository) {
-
         this.paymentRepository = paymentRepository;
-
     }
 
     public List<PaymentDto> execute(String clientKey) {
-
-        var payments = paymentRepository.findByClientKey(clientKey);
-
-        if (payments.isEmpty()) {
-
-            throw new ValidationException("Nao existe pagamentos para o cliente");
-
-        }
 
         return paymentRepository.findByClientKey(clientKey).stream()
                 .map(ConvertEntityToDto::convertAllValues)
