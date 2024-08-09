@@ -9,4 +9,4 @@ spring:
         mongodb:
             uri: ${MONGO_URL:mongodb://localhost:27017/fiap-hackathon-payment-db}
 ms-credit-card:
-    url: http://localhost:8083/api/cartao
+    url: ${CARD_MS_URL:http://localhost:8083/api/cartao}
